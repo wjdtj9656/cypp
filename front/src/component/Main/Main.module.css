@@ -1,0 +1,11 @@
+.Main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.searchBar {
+  width: 300px;
+}
