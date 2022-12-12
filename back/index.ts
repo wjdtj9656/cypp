@@ -1,7 +1,7 @@
 import express, { Request, Response, NextFunction } from "express";
 import { getUserByNickname } from "./Api/Cyphers/cypherUser";
 import cors from "cors";
-
+import "./util/env";
 const app = express();
 const allowedOrigins = ["http://localhost:3000"];
 const options: cors.CorsOptions = {
