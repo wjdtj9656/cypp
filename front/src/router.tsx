@@ -1,5 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
 import App from "./App";
+import UserInfo from "./component/User/UserInfo";
 
 const router = createBrowserRouter([
   {
@@ -16,5 +17,6 @@ const router = createBrowserRouter([
     //   },
     // ],
   },
+  { path: "/user/:nickname", element: <UserInfo /> },
 ]);
 export default router;

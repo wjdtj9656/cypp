@@ -1,5 +1,6 @@
 import { Autocomplete, Box, TextField, ThemeProvider, Typography } from "@mui/material";
 import { useState } from "react";
+import { useNavigate } from "react-router";
 import { getUserByNickname } from "../../Api/Cyphers/cyphersUser";
 import colorTheme from "../../theme/colorTheme";
 import styles from "./Main.module.css";
@@ -8,6 +9,7 @@ const Main = () => {
   const [nowUser, setNowUser] = useState([]);
   const [value, setValue] = useState<string | null>("");
   const [inputValue, setInputValue] = useState("");
+  const navigate = useNavigate();
   return (
     <Box className={styles.Main}>
       <Box>
@@ -24,12 +26,13 @@ const Main = () => {
               if (newValue) {
                 setValue(newValue);
                 alert(newValue);
+                navigate(`/user/newValue`);
               }
             }}
-            onInputChange={(event, newInputValue) => {
-              setInputValue(newInputValue);
-              console.log(value);
-            }}
+            // onInputChange={(event, newInputValue) => {
+            //   setInputValue(newInputValue);
+            //   console.log(value);
+            // }}
             renderInput={(params) => (
               <TextField
                 {...params}
