@@ -5,7 +5,7 @@ const getUserByNickname = async (nickname: string) => {
     params: {
       nickname: nickname,
       wordType: "full",
-      limit: 50,
+      limit: 20,
       apikey: `${process.env.API_KEY_NEOPLE}`,
     },
 

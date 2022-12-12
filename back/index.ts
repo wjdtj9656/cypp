@@ -11,7 +11,6 @@ app.get("/", (req: Request, res: Response, next: NextFunction) => {
   res.send("hi!");
 });
 app.get("/user/:nickname", cors(), async (req: Request, res: Response, next: NextFunction) => {
-  console.log(req.params);
   const userData = await getUserByNickname(req.params.nickname);
   res.json(userData.rows);
 });

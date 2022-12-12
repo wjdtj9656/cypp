@@ -6,6 +6,8 @@ import styles from "./Main.module.css";
 const Main = () => {
   const [nickname, setNickname] = useState("");
   const [nowUser, setNowUser] = useState([]);
+  const [value, setValue] = useState<string | null>("");
+  const [inputValue, setInputValue] = useState("");
   return (
     <Box className={styles.Main}>
       <Box>
@@ -17,6 +19,17 @@ const Main = () => {
             id="userName"
             freeSolo
             options={[...nowUser]}
+            value={value}
+            onChange={(event, newValue: string | null) => {
+              if (newValue) {
+                setValue(newValue);
+                alert(newValue);
+              }
+            }}
+            onInputChange={(event, newInputValue) => {
+              setInputValue(newInputValue);
+              console.log(value);
+            }}
             renderInput={(params) => (
               <TextField
                 {...params}
