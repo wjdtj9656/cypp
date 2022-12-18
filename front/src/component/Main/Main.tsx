@@ -25,8 +25,11 @@ const Main = () => {
             onChange={(event, newValue: string | null) => {
               if (newValue) {
                 setValue(newValue);
-                alert(newValue);
-                navigate(`/user/newValue`);
+                navigate(`/user/${newValue}`, {
+                  state: {
+                    nickname: newValue,
+                  },
+                });
               }
             }}
             // onInputChange={(event, newInputValue) => {
