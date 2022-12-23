@@ -1,4 +1,4 @@
-import { Box, Button, TextField, ThemeProvider, Typography } from "@mui/material";
+import { Box, Button, Pagination, TextField, ThemeProvider, Typography } from "@mui/material";
 import { useState } from "react";
 import { useLocation } from "react-router";
 import colorTheme from "../../theme/colorTheme";
@@ -49,6 +49,7 @@ const UserInfo = () => {
             <Box className={styles.logBoard}>{v}</Box>
           ))}
         </Box>
+        <Pagination count={10} size="small" />
         {/* <Box className={styles.logBoard}>{chat.forEach((v) => v)}</Box> */}
       </Box>
     </Box>
