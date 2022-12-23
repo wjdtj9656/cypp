@@ -5,6 +5,7 @@ import "./util/env";
 import { sequelize } from "./util/database";
 import { DataTypes } from "sequelize";
 import { User } from "./models/user";
+import { Comment } from "./models/comment";
 const app = express();
 const allowedOrigins = ["http://localhost:3000"];
 
@@ -18,18 +19,8 @@ app.get("/user/:nickname", cors(), async (req: Request, res: Response, next: Nex
   const userData = await getUserByNickname(req.params.nickname);
   res.json(userData.rows);
 });
-// sequelize.define("hehe", { id: { type: DataTypes.INTEGER, primaryKey: true } });
-// sequelize
-//   .sync()
-//   .then((result) => {
-//     console.log(result);
-//     console.log("All models were synchronized successfully.");
-//     // sequelize.drop();
-//   })
-//   .catch((err) => {
-//     console.log(err);
-//   });
 User.sync({ force: true });
+Comment.sync({ force: true });
 app.listen("8000", () => {
   console.log(`
       #############################################
