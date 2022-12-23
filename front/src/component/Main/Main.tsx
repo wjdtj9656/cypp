@@ -44,23 +44,18 @@ const Main = () => {
                 // onChange={(e) => setNickname(e.target.value)}
                 onChange={async (e) => {
                   setNickname(e.target.value);
-                  const result = await getUserByNickname(e.target.value);
-                  const nickNameArr = result.map((item: any) => item.nickname);
-                  setNowUser(nickNameArr);
+                  try {
+                    const result = await getUserByNickname(e.target.value);
+                    const nickNameArr = result.map((item: any) => item.nickname);
+                    setNowUser(nickNameArr);
+                  } catch (e) {
+                    alert("아이디 불러오기 실패");
+                  }
                 }}
               />
             )}
           />
         </ThemeProvider>
-        {/* <button
-          onClick={async () => {
-            const result = await getUserByNickname(nickname);
-            const nickNameArr = result.map((item: any) => item.nickname);
-            setNowUser(nickNameArr);
-          }}
-        >
-          haha
-        </button> */}
       </Box>
     </Box>
   );
