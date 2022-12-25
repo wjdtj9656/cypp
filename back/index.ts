@@ -6,18 +6,43 @@ import { sequelize } from "./util/database";
 import { DataTypes } from "sequelize";
 import { User } from "./models/user";
 import { Comment } from "./models/comment";
+import { saveUserNickname } from "./controllers/users";
+import bodyParser from "body-parser";
+import { saveComments } from "./controllers/comments";
+// let bodyParser = require("body-parser");
 const app = express();
 const allowedOrigins = ["http://localhost:3000"];
 
 const options: cors.CorsOptions = {
   origin: allowedOrigins,
 };
+app.use(cors());
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 app.get("/", (req: Request, res: Response, next: NextFunction) => {
   res.send("hi!");
 });
 app.get("/user/:nickname", cors(), async (req: Request, res: Response, next: NextFunction) => {
-  const userData = await getUserByNickname(req.params.nickname);
-  res.json(userData.rows);
+  try {
+    const userData = await getUserByNickname(req.params.nickname);
+    res.json(userData.rows);
+  } catch (e) {
+    console.log(e);
+  }
+});
+app.get("/user/info/:nickname", async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    await saveUserNickname(req.params.nickname);
+  } catch (e) {
+    console.log(e);
+  }
+});
+app.post("/user/comments", cors(), async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    saveComments(req.body);
+  } catch (e) {
+    console.log(e);
+  }
 });
 User.sync({ force: true });
 Comment.sync({ force: true });

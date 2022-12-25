@@ -1,4 +1,4 @@
-import apiInstance from "./api";
+import apiInstance from "../api";
 
 const api = apiInstance();
 
@@ -7,4 +7,9 @@ const getUserByNickname = async (nickname: string) => {
   if (result.status !== 200) throw new Error("user info load failed");
   return result.data;
 };
-export { getUserByNickname };
+const setUserInfo = async (nickname: string) => {
+  const result = await api.get(`/user/info/${nickname}`);
+  console.log(result);
+  return result.data;
+};
+export { getUserByNickname, setUserInfo };

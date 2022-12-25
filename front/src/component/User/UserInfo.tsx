@@ -1,6 +1,8 @@
 import { Box, Button, Pagination, TextField, ThemeProvider, Typography } from "@mui/material";
 import { useState } from "react";
 import { useLocation } from "react-router";
+import { saveComment } from "../../Api/Comment/comment";
+import { getUserByNickname } from "../../Api/Cyphers/cyphersUser";
 import colorTheme from "../../theme/colorTheme";
 import styles from "./UserInfo.module.css";
 const UserInfo = () => {
@@ -35,9 +37,12 @@ const UserInfo = () => {
             border: "1px solid black",
             floodColor: "black",
           }}
-          onClick={() => {
+          onClick={async () => {
             //빈 값
             if (!text) return;
+            const userData = await getUserByNickname(nickname);
+            const userInfo = userData[0];
+            saveComment(userInfo.playerId, text);
             setChat([...chat, text]);
             setText("");
           }}

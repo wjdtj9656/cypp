@@ -4,16 +4,16 @@ import { sequelize } from "../util/database";
 const Comment = sequelize.define(
   "comments",
   {
+    id: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true,
+    },
     playerId: {
       type: DataTypes.STRING,
-      primaryKey: true,
       allowNull: true,
     },
     comment: {
-      type: DataTypes.STRING,
-      allowNull: true,
-    },
-    writer: {
       type: DataTypes.STRING,
       allowNull: true,
     },

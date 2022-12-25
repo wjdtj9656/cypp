@@ -1,7 +1,7 @@
 import { Autocomplete, Box, TextField, ThemeProvider, Typography } from "@mui/material";
 import { useState } from "react";
 import { useNavigate } from "react-router";
-import { getUserByNickname } from "../../Api/Cyphers/cyphersUser";
+import { getUserByNickname, setUserInfo } from "../../Api/Cyphers/cyphersUser";
 import colorTheme from "../../theme/colorTheme";
 import styles from "./Main.module.css";
 const Main = () => {
@@ -25,6 +25,7 @@ const Main = () => {
             onChange={(event, newValue: string | null) => {
               if (newValue) {
                 setValue(newValue);
+                setUserInfo(newValue);
                 navigate(`/user/${newValue}`, {
                   state: {
                     nickname: newValue,

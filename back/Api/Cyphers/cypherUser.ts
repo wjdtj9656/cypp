@@ -8,9 +8,8 @@ const getUserByNickname = async (nickname: string) => {
       limit: 20,
       apikey: `${process.env.API_KEY_NEOPLE}`,
     },
-
-    headers: { "Access-Control-Allow-Origin": "*" },
   });
+  if (!result) throw new Error("유저정보 불러오기 실패");
   return result.data;
 };
 export { getUserByNickname };
