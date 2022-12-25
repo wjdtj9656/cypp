@@ -8,8 +8,11 @@ const getUserByNickname = async (nickname: string) => {
   return result.data;
 };
 const setUserInfo = async (nickname: string) => {
-  const result = await api.get(`/user/info/${nickname}`);
-  console.log(result);
-  return result.data;
+  try {
+    const result = await api.get(`/user/info/${nickname}`);
+    return result.data;
+  } catch (e) {
+    console.log(e);
+  }
 };
 export { getUserByNickname, setUserInfo };
