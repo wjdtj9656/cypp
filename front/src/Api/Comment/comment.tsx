@@ -11,6 +11,6 @@ const saveComment = async (playerId: string, comment: string) => {
 };
 const loadComments = async (playerId: string, pageNo: Number) => {
   const result = await api.get(`/user/comments/${playerId}?countperpage=5&pageno=${pageNo}`);
-  return result.data;
+  return result.data.commentInfo;
 };
 export { saveComment, loadComments };

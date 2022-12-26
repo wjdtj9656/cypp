@@ -1,18 +1,26 @@
 import { Box, Button, Pagination, TextField, ThemeProvider, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
-import { useLocation } from "react-router";
+import { useLocation, useNavigate } from "react-router";
 import { loadComments, saveComment } from "../../Api/Comment/comment";
 import { getUserByNickname } from "../../Api/Cyphers/cyphersUser";
 import colorTheme from "../../theme/colorTheme";
 import styles from "./UserInfo.module.css";
 const UserInfo = () => {
   const location = useLocation();
-  const nickname = location.state.nickname;
+  const [nickname, setNickname] = useState("");
   const [chat, setChat] = useState<string[]>([]);
   const [text, setText] = useState("");
   const [pageNo, setPageNo] = useState(1);
   const [commentSize, setCommentSize] = useState(1);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!location.state) navigate("/");
+    setNickname(location.state.nickname);
+  }, []);
+
   const getPlayerId = async (nickname: string) => {
+    if (!nickname) return;
     const result = await getUserByNickname(nickname);
     return result[0].playerId;
   };
@@ -26,7 +34,7 @@ const UserInfo = () => {
   };
   useEffect(() => {
     loadComment();
-  }, [pageNo]);
+  }, [pageNo, nickname]);
   return (
     <Box className={styles.userMain}>
       <Box className={styles.userInfo}>
@@ -68,8 +76,8 @@ const UserInfo = () => {
           작성하기
         </Button>
         <Box>
-          {chat.map((v) => (
-            <Box className={styles.logBoard}>
+          {chat.map((v, index) => (
+            <Box className={styles.logBoard} key={index}>
               {`${v[0]}`}
               <Typography
                 sx={{ fontSize: 10, display: "flex", justifyContent: "right", marginRight: 1 }}

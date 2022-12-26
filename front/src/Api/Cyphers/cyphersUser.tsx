@@ -3,14 +3,17 @@ import apiInstance from "../api";
 const api = apiInstance();
 
 const getUserByNickname = async (nickname: string) => {
-  const result = await api.get(`/user/${nickname}`);
-  if (result.status !== 200) throw new Error("user info load failed");
-  return result.data;
+  try {
+    if (!nickname) throw new Error("empty nickname");
+    const result = await api.get(`/user/${nickname}`);
+    return result.data.userData;
+  } catch (e) {
+    console.log(e, nickname);
+  }
 };
 const setUserInfo = async (nickname: string) => {
   try {
-    const result = await api.get(`/user/info/${nickname}`);
-    return result.data;
+    await api.get(`/user/info/${nickname}`);
   } catch (e) {
     console.log(e);
   }
