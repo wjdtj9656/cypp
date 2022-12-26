@@ -49,10 +49,17 @@ const UserInfo = () => {
               className={styles.inputBox}
               placeholder="타인의 권리를 침해하거나 명예를 훼손하는 댓글은 통보없이 삭제됩니다."
               onChange={(e) => {
+                if (text.length >= 500) {
+                  setText(text.substring(0, 499));
+                  return;
+                }
                 setText(e.target.value);
               }}
               value={text}
             />
+            <Typography sx={{ display: "flex", justifyContent: "right", opacity: 0.4 }}>
+              {text.length}/500
+            </Typography>
           </ThemeProvider>
         </Box>
         <Button
@@ -65,6 +72,10 @@ const UserInfo = () => {
           onClick={async () => {
             //빈 값
             if (!text) return;
+            if (text.length > 500) {
+              alert("글자 수 제한은 500 입니다.");
+              return;
+            }
             const userData = await getUserByNickname(nickname);
             const userInfo = userData[0];
             saveComment(userInfo.playerId, text);
@@ -78,7 +89,7 @@ const UserInfo = () => {
         <Box>
           {chat.map((v, index) => (
             <Box className={styles.logBoard} key={index}>
-              {`${v[0]}`}
+              <Typography sx={{ overflowWrap: "break-word" }}>{`${v[0]}`}</Typography>
               <Typography
                 sx={{ fontSize: 10, display: "flex", justifyContent: "right", marginRight: 1 }}
               >

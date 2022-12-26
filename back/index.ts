@@ -63,8 +63,8 @@ app.get("/user/comments/:playerId", async (req: Request, res: Response, next: Ne
     console.log(e);
   }
 });
-User.sync({});
-Comment.sync({});
+User.sync({ force: true });
+Comment.sync({ force: true });
 app.listen("8000", () => {
   console.log(`
       #############################################
