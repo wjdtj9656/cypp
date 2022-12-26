@@ -25,14 +25,15 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.get("/user/:nickname", cors(), async (req: Request, res: Response, next: NextFunction) => {
   try {
     const userData = await getUserByNickname(req.params.nickname);
-    res.json(userData.rows);
+    res.json({ ok: true, userData: userData.rows });
   } catch (e) {
     console.log(e);
   }
 });
 app.get("/user/info/:nickname", async (req: Request, res: Response, next: NextFunction) => {
   try {
-    await saveUserNickname(req.params.nickname);
+    saveUserNickname(req.params.nickname);
+    res.json({ ok: true });
   } catch (e) {
     console.log(e);
   }
@@ -40,6 +41,7 @@ app.get("/user/info/:nickname", async (req: Request, res: Response, next: NextFu
 app.post("/user/comments", cors(), async (req: Request, res: Response, next: NextFunction) => {
   try {
     saveComments(req.body);
+    res.json({ ok: true });
   } catch (e) {
     console.log(e);
   }
@@ -56,7 +58,7 @@ app.get("/user/comments/:playerId", async (req: Request, res: Response, next: Ne
       if (!result[i]) break;
       commentList.push([result[i].dataValues.comment, result[i].dataValues.createdAt]);
     }
-    res.json([result.length, commentList]);
+    res.json({ ok: true, commentInfo: [result.length, commentList] });
   } catch (e) {
     console.log(e);
   }
