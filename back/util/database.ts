@@ -2,6 +2,7 @@ import { Sequelize } from "sequelize";
 const sequelize = new Sequelize("cypp", "cyppmaster", process.env.DB_PASSWORD, {
   host: "cyppdb.chvb05f017rb.ap-northeast-2.rds.amazonaws.com",
   dialect: "mysql",
+  port: 3306,
   define: {
     underscored: true,
     freezeTableName: true, //use singular table name
