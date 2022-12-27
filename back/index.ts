@@ -19,9 +19,9 @@ const options: cors.CorsOptions = {
 app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-// app.get("/", (req: Request, res: Response, next: NextFunction) => {
-//   res.send("hi!");
-// });
+app.get("/", (req: Request, res: Response, next: NextFunction) => {
+  res.send("hi!");
+});
 app.get("/user/:nickname", cors(), async (req: Request, res: Response, next: NextFunction) => {
   try {
     const userData = await getUserByNickname(req.params.nickname);
