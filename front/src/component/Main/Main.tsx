@@ -50,7 +50,7 @@ const Main = () => {
                     const nickNameArr = result.map((item: any) => item.nickname);
                     setNowUser(nickNameArr);
                   } catch (e) {
-                    alert("아이디 불러오기 실패");
+                    // alert("아이디 불러오기 실패");
                   }
                 }}
               />
