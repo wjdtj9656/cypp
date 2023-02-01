@@ -1,5 +1,5 @@
 import { Sequelize } from "sequelize";
-const sequelize = new Sequelize("cypp", "cyppmaster", process.env.DB_PASSWORD, {
+const sequelize = new Sequelize("cypp", "cyppmaster", process.env.DB_PASSWORD_SERVER, {
   host: "cyppdb.chvb05f017rb.ap-northeast-2.rds.amazonaws.com",
   // const sequelize = new Sequelize("exuser", "root", process.env.DB_PASSWORD, {
   //   host: "localhost",
