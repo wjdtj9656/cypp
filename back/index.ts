@@ -47,18 +47,17 @@ app.get("/user/comments/:playerId", async (req: Request, res: Response, next: Ne
   try {
     const result: any = await loadComment(req.params.playerId);
     const commentList = [];
-    result.sort(
-      (a: any, b: any) =>
-        new Date(b.dataValues.createdAt).getTime() - new Date(a.dataValues.createdAt).getTime()
-    );
+    result.sort((a: any, b: any) => {
+      return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
+    });
     let pageNo = Number(req.query.pageno) - 1;
     let countPerPage = Number(req.query.countperpage);
     let index = countPerPage * pageNo;
     for (let i = index; i < index + countPerPage; i++) {
       if (!result[i]) break;
-      commentList.push([result[i].dataValues.comment, result[i].dataValues.createdAt]);
+      commentList.push([result[i].comment, result[i].createdAt]);
     }
-    res.json({ ok: true, commentInfo: [result.length, commentList] });
+    res.json({ ok: true, commentInfo: [result.length, commentList], result });
   } catch (e) {
     console.log(e);
   }

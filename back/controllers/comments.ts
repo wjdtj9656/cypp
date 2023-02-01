@@ -11,6 +11,7 @@ const loadComment = async (playerId: string) => {
     where: {
       playerId: playerId,
     },
+    raw: true,
   });
   return commentList;
 };
