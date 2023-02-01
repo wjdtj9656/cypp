@@ -2,14 +2,11 @@ import express, { Request, Response, NextFunction } from "express";
 import { getUserByNickname } from "./Api/Cyphers/cypherUser";
 import cors from "cors";
 import "./util/env";
-import { sequelize } from "./util/database";
-import { DataTypes } from "sequelize";
 import { User } from "./models/user";
 import { Comment } from "./models/comment";
 import { saveUserNickname } from "./controllers/users";
 import bodyParser from "body-parser";
 import { loadComment, saveComments } from "./controllers/comments";
-// let bodyParser = require("body-parser");
 const app = express();
 const allowedOrigins = ["http://localhost:3000"];
 
@@ -27,7 +24,7 @@ app.get("/user/:nickname", cors(), async (req: Request, res: Response, next: Nex
     const userData = await getUserByNickname(req.params.nickname);
     res.json({ ok: true, userData: userData.rows });
   } catch (e) {
-    console.log(e);
+    // console.log(e);
   }
 });
 app.get("/user/info/:nickname", async (req: Request, res: Response, next: NextFunction) => {
@@ -50,7 +47,10 @@ app.get("/user/comments/:playerId", async (req: Request, res: Response, next: Ne
   try {
     const result: any = await loadComment(req.params.playerId);
     const commentList = [];
-    result.sort((a: any, b: any) => b.dataValues.createdAt - a.dataValues.createdAt);
+    result.sort(
+      (a: any, b: any) =>
+        new Date(b.dataValues.createdAt).getTime() - new Date(a.dataValues.createdAt).getTime()
+    );
     let pageNo = Number(req.query.pageno) - 1;
     let countPerPage = Number(req.query.countperpage);
     let index = countPerPage * pageNo;
