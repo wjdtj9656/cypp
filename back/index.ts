@@ -8,7 +8,7 @@ import { saveUserNickname } from "./controllers/users";
 import bodyParser from "body-parser";
 import { loadComment, saveComments } from "./controllers/comments";
 const app = express();
-const allowedOrigins = ["http://localhost:3000"];
+const allowedOrigins = ["http://localhost:3000", "http:cypp.link:3000", "http:cypp.link"];
 
 const options: cors.CorsOptions = {
   origin: allowedOrigins,
