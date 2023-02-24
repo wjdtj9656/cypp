@@ -30,7 +30,7 @@ if (process.env.NODE_ENV == "production") {
   try {
     const option = {
       ca: fs.readFileSync("/etc/letsencrypt/archive/cypp.link/fullchain1.pem"),
-      key: fs.readFileSync("/etc/letsencrypt/archive/cypp.link/privkey1..pem"),
+      key: fs.readFileSync("/etc/letsencrypt/archive/cypp.link/privkey1.pem"),
       cert: fs.readFileSync("/etc/letsencrypt/archive/cypp.link/cert1.pem"),
     };
     https.createServer(option, app).listen(8000, () => {
