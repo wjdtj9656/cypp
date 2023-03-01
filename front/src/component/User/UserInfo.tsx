@@ -34,7 +34,7 @@ const UserInfo = () => {
   };
   useEffect(() => {
     loadComment();
-  }, [pageNo, nickname, chat]);
+  }, [pageNo, nickname]);
   return (
     <Box className={styles.userMain}>
       <Box className={styles.userInfo}>
