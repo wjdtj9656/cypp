@@ -19,4 +19,4 @@
 
 [배포 이후에 새로고침 시 404 error](https://kjs-dev.tistory.com/entry/web-react-%EC%83%88%EB%A1%9C%EA%B3%A0%EC%B9%A8-%EC%8B%9C-404-Error) 
 
-[HTTP 적용기](https://kjs-dev.tistory.com/entry/HTTPS-%EC%A0%81%EC%9A%A9%EA%B8%B0-TLSSSL)   
+[HTTPS 적용기](https://kjs-dev.tistory.com/entry/HTTPS-%EC%A0%81%EC%9A%A9%EA%B8%B0-TLSSSL)   
