@@ -10,7 +10,7 @@ const UserInfo = () => {
   const [nickname, setNickname] = useState("");
   const [chat, setChat] = useState<string[]>([]);
   const [text, setText] = useState("");
-  const [pageNo, setPageNo] = useState(1);
+  const [pageNo, setPageNo] = useState<number>(1);
   const [commentSize, setCommentSize] = useState(1);
   const navigate = useNavigate();
 
@@ -78,8 +78,9 @@ const UserInfo = () => {
             }
             const userData = await getUserByNickname(nickname);
             const userInfo = userData[0];
-            saveComment(userInfo.playerId, text);
+            await saveComment(userInfo.playerId, text);
             // setChat([...chat, text]);
+            setPageNo(1);
             setText("");
             loadComment();
           }}
@@ -102,8 +103,10 @@ const UserInfo = () => {
           count={commentSize}
           page={pageNo}
           size="small"
-          onChange={(event: any) => {
-            setPageNo(Number(event?.target.textContent));
+          showFirstButton
+          showLastButton
+          onChange={(event: any, num: number) => {
+            setPageNo(num);
           }}
         />
       </Box>
